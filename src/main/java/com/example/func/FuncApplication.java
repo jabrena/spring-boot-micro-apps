@@ -38,6 +38,7 @@ import org.springframework.boot.autoconfigure.web.reactive.WebFluxRegistrations;
 import org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor;
+import org.springframework.boot.ssl.SslBundle;
 import org.springframework.boot.web.codec.CodecCustomizer;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext;
@@ -176,7 +177,7 @@ public class FuncApplication implements Runnable, Closeable,
 		registerConfigurationProperties();
 		// context.registerBean(LazyInitBeanFactoryPostProcessor.class);
 		registerPropertyPlaceholderAutoConfiguration();
-		registerReactiveWebServerFactoryAutoConfiguration();
+		//registerReactiveWebServerFactoryAutoConfiguration();
 		registerErrorWebFluxAutoConfiguration();
 		registerWebFluxAutoConfiguration();
 		registerHttpHandlerAutoConfiguration();
@@ -253,14 +254,18 @@ public class FuncApplication implements Runnable, Closeable,
 						.propertySourcesPlaceholderConfigurer());
 	}
 
+
+	/*
 	private void registerReactiveWebServerFactoryAutoConfiguration() {
 		ReactiveWebServerFactoryAutoConfiguration config = new ReactiveWebServerFactoryAutoConfiguration();
+		ObjectProvider<SslBundle> objectProvider = ;
 		context.registerBean(ReactiveWebServerFactoryCustomizer.class,
 				() -> config.reactiveWebServerFactoryCustomizer(
-						context.getBean(ServerProperties.class)));
+						context.getBean(ServerProperties.class, objectProvider)));
 		context.registerBean(NettyReactiveWebServerFactory.class,
 				() -> new NettyReactiveWebServerFactory());
 	}
+	*/
 
 	private void registerErrorWebFluxAutoConfiguration() {
 		context.registerBean(ErrorAttributes.class, () -> new DefaultErrorAttributes());
