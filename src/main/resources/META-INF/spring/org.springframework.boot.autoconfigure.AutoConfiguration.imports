@@ -1,0 +1,3 @@
+com.example.config.BeanCountingApplicationListener
+com.example.config.StartupApplicationListener
+com.example.config.ShutdownApplicationListener
